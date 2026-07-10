@@ -1,0 +1,19 @@
+#! /bin/bash
+
+set -ex
+
+# Make a link from the shared documents directory to the user home directory.
+ln -s ~/shared/docs ~/docs
+
+# Make a local cache directory.
+mkdir -p ~/cache
+# Link any directory in the global cache to the user's local cache if they don't
+# already exist.
+find "${HOME}/shared/cache/" -mindepth 1 -type d -exec sh -c '
+  cachedir="$1"
+  base="$(basename "${cachedir}")"
+  if [ ! -e "${HOME}/cache/${base}" ]
+  then ln -s "${cachedir}" "${HOME}/cache/${base}"
+  fi
+' sh {} ';'
+
