@@ -1,0 +1,18 @@
+#! /bin/bash
+
+# Make a local cache directory.
+mkdir -p /home/jovyan/cache
+# Link some global cache directories to the user's local cache.
+if ! [ -e /home/jovyan/cache/PNC_FreeSurfer ]
+then ln -s /home/jovyan/shared/cache/PNC_FreeSurfer /home/jovyan/cache/PNC_FreeSurfer
+fi
+# Link shared docs to home docs directory also.
+if ! [ -e /home/jovyan/docs ]
+then ln -s /home/jovyan/shared/docs /home/jovyan/docs
+fi
+
+# Add the shared bin/ dir to the path.
+export PATH="${PATH}:/home/jovyan/shared/bin"
+
+# Start the hub...
+exec "$@"
