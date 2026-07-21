@@ -67,3 +67,7 @@ dependencies:
     - platformdirs
     - jupyter-keepalive
     - git+https://github.com/NeuroHackademy2026/rbclib@main
+    - nipoppy
+    - pytest
+    - fmralign
+    - git+https://github.com/rmldj/hcp-utils@master
